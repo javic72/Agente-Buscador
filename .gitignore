@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.py[cod]
+
+data/opportunities.csv
+reports/*.html
+
+.env
+.env.*
+!.env.example

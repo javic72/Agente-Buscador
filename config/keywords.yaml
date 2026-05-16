@@ -1,0 +1,453 @@
+priority_sectors:
+  - Oficinas
+  - Retail
+  - Hoteles
+  - Educación privada
+  - Sanidad privada
+  - Deporte
+  - Cultura y ocio
+  - Coworking y coliving
+
+future_project_signals:
+  - abrirá
+  - prevé abrir
+  - prepara apertura
+  - abrirá sus puertas
+  - próxima apertura
+  - proyecta
+  - planea
+  - construirá
+  - desarrollará
+  - iniciará obras
+  - invertirá
+  - reformará
+  - ampliará
+  - nuevo proyecto
+  - en construcción
+  - en desarrollo
+  - previsto para
+  - estará operativo en
+  - ultima la apertura
+  - alquila edificio para
+  - compra edificio para
+  - busca ubicación
+  - busca local
+  - plan de expansión
+  - aperturas previstas
+
+planning_signals:
+  - proyecta
+  - planea
+  - nuevo proyecto
+  - busca ubicación
+  - busca local
+  - compra edificio para
+  - alquila edificio para
+
+construction_reform_signals:
+  - en construcción
+  - en obras
+  - iniciará obras
+  - construirá
+  - reformará
+  - reforma integral
+  - ampliará
+  - remodelación
+  - rehabilitación
+
+upcoming_opening_signals:
+  - abrirá
+  - prevé abrir
+  - prepara apertura
+  - abrirá sus puertas
+  - próxima apertura
+  - previsto para
+  - estará operativo en
+  - ultima la apertura
+
+expansion_future_signals:
+  - plan de expansión
+  - aperturas previstas
+  - nuevas aperturas
+  - abrirá nuevas
+  - prevé nuevas aperturas
+  - segunda fase
+  - prepara otro proyecto
+  - anuncia futuras aperturas
+
+already_opened_signals:
+  - inaugura
+  - ha inaugurado
+  - inauguró
+  - ya ha abierto
+  - abrió
+  - abre hoy
+  - abre sus puertas
+  - ha abierto sus puertas
+  - estrena sede
+  - estrena tienda
+  - celebró la apertura
+  - acaba de inaugurar
+  - nueva sede inaugurada
+  - tienda inaugurada
+  - hotel inaugurado
+  - reapertura celebrada
+
+positive_signal_keywords:
+  - label: nueva sede
+    score_key: nueva_sede
+    keywords:
+      - nueva sede
+      - sede corporativa
+      - nueva sede corporativa
+      - campus corporativo
+  - label: nuevas oficinas
+    score_key: nuevas_oficinas
+    keywords:
+      - nuevas oficinas
+      - abre oficinas
+      - traslada sus oficinas
+      - alquila edificio
+      - oficinas flexibles
+  - label: apertura confirmada
+    score_key: apertura_confirmada
+    keywords:
+      - apertura
+      - abrirá
+      - abre
+      - inaugurará
+      - inaugura
+      - nueva tienda
+      - nuevo centro
+  - label: reforma integral
+    score_key: reforma_integral
+    keywords:
+      - reforma integral
+      - renovación integral
+      - remodelación
+      - rehabilitación
+  - label: reapertura
+    score_key: reapertura
+    keywords:
+      - reapertura
+      - reabrirá
+      - vuelve a abrir
+  - label: flagship
+    score_key: flagship
+    keywords:
+      - flagship
+      - flagship store
+  - label: campus
+    score_key: campus
+    keywords:
+      - campus
+      - nuevo campus
+  - label: hub
+    score_key: hub
+    keywords:
+      - hub
+      - hub tecnológico
+      - centro de innovación
+  - label: hotel
+    score_key: hotel
+    keywords:
+      - hotel
+      - resort
+      - apertura hotelera
+      - hotel boutique
+  - label: estadio
+    score_key: estadio
+    keywords:
+      - estadio
+      - arena multiusos
+  - label: museo
+    score_key: museo
+    keywords:
+      - museo
+      - espacio expositivo
+  - label: espacio inmersivo
+    score_key: espacio_inmersivo
+    keywords:
+      - espacio inmersivo
+      - experiencia inmersiva
+
+negative_signal_keywords:
+  - label: licitación pública
+    score_key: licitacion_publica
+    keywords:
+      - licitación pública
+      - licitacion publica
+      - licitación
+      - licitacion
+      - concurso público
+      - concurso publico
+  - label: contratación pública
+    score_key: contratacion_publica
+    keywords:
+      - contratación pública
+      - contratacion publica
+      - contrato público
+      - contrato publico
+      - adjudicación pública
+      - adjudicacion publica
+      - plataforma de contratación
+  - label: administración pública como protagonista
+    score_key: administracion_publica_como_protagonista
+    keywords:
+      - boe
+      - bop
+      - ayuntamiento
+      - diputación
+      - diputacion
+      - ministerio
+      - consejería
+      - consejeria
+      - subvención
+      - subvencion
+  - label: noticia política
+    score_key: noticia_politica
+    keywords:
+      - política
+      - politica
+      - elecciones
+      - campaña electoral
+      - debate parlamentario
+      - partido político
+  - label: nombramiento sin proyecto físico
+    score_key: nombramiento_sin_proyecto
+    keywords:
+      - nombramiento
+      - nombramientos
+      - nuevo director
+      - nueva directora
+      - director general
+      - directora general
+
+private_operator_keywords:
+  - empresa
+  - grupo
+  - cadena
+  - operador
+  - marca
+  - compañía
+  - compania
+  - sociedad
+  - privada
+  - privado
+  - family office
+  - fondo
+  - promotora
+  - franquicia
+
+physical_space_keywords:
+  - oficina
+  - oficinas
+  - sede
+  - hub
+  - campus
+  - edificio
+  - tienda
+  - flagship
+  - retail park
+  - hotel
+  - resort
+  - clínica
+  - clinica
+  - hospital
+  - centro médico
+  - centro medico
+  - gimnasio
+  - centro deportivo
+  - estadio
+  - arena
+  - museo
+  - espacio inmersivo
+  - espacio expositivo
+  - espacio de ocio
+  - coworking
+  - coliving
+  - residencia de estudiantes
+
+financial_only_keywords:
+  - resultados financieros
+  - beneficio neto
+  - dividendos
+  - cotización
+  - cotizacion
+  - cotización bursátil
+  - cotizacion bursatil
+  - bolsa
+  - ebitda
+  - ingresos trimestrales
+
+project_type_keywords:
+  - project_type: Nueva sede corporativa
+    keywords:
+      - nueva sede
+      - sede corporativa
+      - campus corporativo
+  - project_type: Nuevas oficinas
+    keywords:
+      - nuevas oficinas
+      - abre oficinas
+      - traslada sus oficinas
+      - alquila edificio
+  - project_type: Hub tecnológico o centro de innovación
+    keywords:
+      - nuevo hub
+      - hub tecnológico
+      - centro de innovación
+  - project_type: Nueva tienda o flagship
+    keywords:
+      - nueva tienda
+      - abrirá tienda
+      - apertura tienda
+      - flagship
+      - concept store
+      - nuevo formato de tienda
+  - project_type: Retail park
+    keywords:
+      - retail park
+  - project_type: Hotel nuevo o reformado
+    keywords:
+      - nuevo hotel
+      - apertura hotel
+      - apertura hotelera
+      - reforma hotel
+      - reapertura hotel
+      - hotel cinco estrellas
+      - nuevo resort
+      - hotel boutique
+  - project_type: Educación privada
+    keywords:
+      - universidad privada
+      - business school
+      - colegio privado
+      - colegio internacional
+      - residencia de estudiantes
+      - student housing
+  - project_type: Sanidad privada
+    keywords:
+      - hospital privado
+      - nueva clínica
+      - centro médico privado
+      - clínica dental
+      - clínica estética
+      - centro de diagnóstico
+  - project_type: Deporte
+    keywords:
+      - nuevo estadio
+      - remodelación estadio
+      - nuevo centro deportivo
+      - centro deportivo privado
+      - cadena de gimnasios
+      - gimnasio
+      - ciudad deportiva
+      - arena multiusos
+  - project_type: Cultura y ocio
+    keywords:
+      - nuevo museo
+      - museo privado
+      - centro cultural
+      - espacio inmersivo
+      - experiencia inmersiva
+      - nuevo espacio expositivo
+      - centro de interpretación
+      - espacio de ocio
+  - project_type: Coworking o coliving
+    keywords:
+      - nuevo coworking
+      - coworking
+      - oficinas flexibles
+      - coliving
+      - flex office
+
+cities_or_areas:
+  - Madrid
+  - Barcelona
+  - Valencia
+  - Sevilla
+  - Zaragoza
+  - Málaga
+  - Malaga
+  - Murcia
+  - Palma
+  - Bilbao
+  - Alicante
+  - Córdoba
+  - Cordoba
+  - Valladolid
+  - Vigo
+  - Gijón
+  - Gijon
+  - Hospitalet
+  - A Coruña
+  - Coruña
+  - Vitoria
+  - Granada
+  - Elche
+  - Oviedo
+  - Badalona
+  - Terrassa
+  - Sabadell
+  - Cartagena
+  - Marbella
+  - Getafe
+  - Alcobendas
+  - Pozuelo
+  - Las Rozas
+  - Sant Cugat
+  - España
+
+probable_technology_needs:
+  default:
+    - pantallas informativas
+    - cartelería digital
+    - audio ambiental
+    - conectividad para espacios
+  Oficinas:
+    - salas de reunión
+    - videoconferencia
+    - pantallas colaborativas
+    - reserva de salas
+    - señalización digital
+  Retail:
+    - cartelería digital
+    - pantallas de escaparate
+    - LED
+    - audio ambiental
+    - analítica de espacios
+  Hoteles:
+    - señalización digital
+    - audio
+    - pantallas para salas
+    - videoconferencia
+    - tecnología para eventos
+  Educación privada:
+    - pantallas interactivas
+    - aulas híbridas
+    - audio de aula
+    - señalización digital
+    - videoconferencia
+  Sanidad privada:
+    - turnos y cartelería digital
+    - pantallas informativas
+    - salas de formación
+    - videoconferencia
+  Deporte:
+    - LED
+    - marcadores
+    - audio distribuido
+    - pantallas informativas
+    - control de salas
+  Cultura y ocio:
+    - proyección
+    - audio inmersivo
+    - LED
+    - señalización digital
+    - control audiovisual
+  Coworking y coliving:
+    - salas de reunión
+    - videoconferencia
+    - señalización digital
+    - control de accesos visual

@@ -1,0 +1,44 @@
+positive_points:
+  senal_futura_clara: 25
+  en_obra_o_reforma: 20
+  proxima_apertura_futura: 20
+  plan_expansion_futuras_ubicaciones: 15
+  nueva_sede: 25
+  nuevas_oficinas: 25
+  apertura_confirmada: 25
+  reforma_integral: 20
+  reapertura: 20
+  ubicacion_concreta: 15
+  fecha_prevista: 10
+  inversion_economica: 15
+  superficie_m2: 10
+  empresa_privada_identificada: 15
+  sector_prioritario: 10
+  flagship: 15
+  campus: 15
+  hub: 15
+  hotel: 15
+  estadio: 15
+  museo: 15
+  espacio_inmersivo: 15
+
+negative_points:
+  ya_inaugurado_abierto: -60
+  licitacion_publica: -50
+  contratacion_publica: -50
+  administracion_publica_como_protagonista: -30
+  noticia_politica: -40
+  solo_resultados_financieros: -25
+  nombramiento_sin_proyecto: -25
+  fecha_publicacion_no_clara: -15
+  sin_espacio_fisico_asociado: -30
+  duplicado: -100
+
+priority_thresholds:
+  alta: 75
+  media: 50
+  baja: 25
+  descartada: 0
+
+deduplication:
+  title_similarity_threshold: 0.88

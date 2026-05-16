@@ -1,0 +1,104 @@
+max_news_age_hours: 48
+initial_backfill_enabled: false
+initial_backfill_days: 7
+future_tolerance_hours: 6
+
+google_news:
+  enabled: true
+  language: es
+  country: ES
+  max_results_per_query: 10
+  timeout_seconds: 15
+  pause_seconds: 1
+
+additional_rss: []
+
+queries:
+  - sector: Oficinas
+    terms:
+      - '"nueva sede" empresa España'
+      - '"nuevas oficinas" empresa España'
+      - '"abre oficinas" empresa España'
+      - '"traslada sus oficinas" España'
+      - '"alquila edificio" oficinas España'
+      - '"nuevo hub" empresa España'
+      - '"centro de innovación" empresa España'
+      - '"campus corporativo" empresa España'
+
+  - sector: Retail
+    terms:
+      - '"nueva tienda" España'
+      - '"abrirá tienda" España'
+      - '"apertura tienda" España'
+      - '"flagship" Madrid'
+      - '"flagship" Barcelona'
+      - '"concept store" España'
+      - '"plan de expansión" tiendas España'
+      - '"aperturas previstas" tiendas España'
+      - '"nuevo formato de tienda" España'
+      - '"retail park" apertura España'
+
+  - sector: Hoteles
+    terms:
+      - '"nuevo hotel" España'
+      - '"apertura hotel" España'
+      - '"apertura hotelera" España'
+      - '"reforma hotel" España'
+      - '"reapertura hotel" España'
+      - '"hotel cinco estrellas" apertura España'
+      - '"cadena hotelera" expansión España'
+      - '"nuevo resort" España'
+      - '"hotel boutique" apertura España'
+
+  - sector: Educación privada
+    terms:
+      - '"nuevo campus" universidad privada España'
+      - '"nuevo edificio" universidad privada España'
+      - '"universidad privada" "nuevo campus"'
+      - '"business school" nueva sede España'
+      - '"colegio privado" nuevo campus España'
+      - '"colegio internacional" apertura España'
+      - '"residencia de estudiantes" apertura España'
+      - '"student housing" España apertura'
+
+  - sector: Sanidad privada
+    terms:
+      - '"nuevo hospital privado" España'
+      - '"nueva clínica" España'
+      - '"centro médico privado" apertura España'
+      - '"hospital privado" ampliación España'
+      - '"grupo sanitario" nueva clínica España'
+      - '"clínica dental" expansión España'
+      - '"clínica estética" apertura España'
+      - '"centro de diagnóstico" apertura España'
+
+  - sector: Deporte
+    terms:
+      - '"nuevo estadio" España'
+      - '"remodelación estadio" España'
+      - '"nuevo centro deportivo" España'
+      - '"centro deportivo privado" apertura España'
+      - '"cadena de gimnasios" expansión España'
+      - '"gimnasio" nuevas aperturas España'
+      - '"ciudad deportiva" proyecto España'
+      - '"arena multiusos" España'
+
+  - sector: Cultura y ocio
+    terms:
+      - '"nuevo museo" España'
+      - '"museo privado" apertura España'
+      - '"centro cultural" apertura España'
+      - '"espacio inmersivo" apertura España'
+      - '"experiencia inmersiva" España'
+      - '"nuevo espacio expositivo" España'
+      - '"centro de interpretación" apertura España'
+      - '"espacio de ocio" apertura España'
+
+  - sector: Coworking y coliving
+    terms:
+      - '"nuevo coworking" España'
+      - '"coworking" apertura Madrid'
+      - '"coworking" apertura Barcelona'
+      - '"oficinas flexibles" nueva sede España'
+      - '"coliving" apertura España'
+      - '"flex office" apertura España'

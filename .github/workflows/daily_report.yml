@@ -1,0 +1,79 @@
+name: Daily opportunity report
+
+on:
+  workflow_dispatch:
+  schedule:
+    # GitHub cron uses UTC. The time gate below keeps the real run at 10:00 Europe/Madrid.
+    - cron: "0 8,9 * * *"
+
+concurrency:
+  group: daily-opportunity-report
+  cancel-in-progress: false
+
+jobs:
+  run-report:
+    runs-on: ubuntu-latest
+
+    env:
+      SMTP_USER: ${{ secrets.SMTP_USER }}
+      SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+
+    steps:
+      - name: Check Spain time window
+        id: time_gate
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import os
+          from datetime import datetime
+          from zoneinfo import ZoneInfo
+
+          is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
+          now = datetime.now(ZoneInfo("Europe/Madrid"))
+          should_run = is_manual or now.hour == 10
+          print(f"should_run={str(should_run).lower()}")
+          print(f"spain_time={now.isoformat(timespec='seconds')}")
+          PY
+
+      - name: Show skipped run
+        if: steps.time_gate.outputs.should_run != 'true'
+        run: echo "Skipped because Spain time is ${{ steps.time_gate.outputs.spain_time }}"
+
+      - name: Check out repository
+        if: steps.time_gate.outputs.should_run == 'true'
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        if: steps.time_gate.outputs.should_run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        if: steps.time_gate.outputs.should_run == 'true'
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
+      - name: Restore local history cache
+        if: steps.time_gate.outputs.should_run == 'true'
+        uses: actions/cache@v4
+        with:
+          path: data/opportunities.csv
+          key: opportunities-history-${{ github.run_id }}
+          restore-keys: |
+            opportunities-history-
+
+      - name: Run report and send email
+        if: steps.time_gate.outputs.should_run == 'true'
+        run: python main.py
+
+      - name: Upload generated report
+        if: steps.time_gate.outputs.should_run == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: daily-report
+          path: |
+            reports/*.html
+            data/opportunities.csv
+          if-no-files-found: warn

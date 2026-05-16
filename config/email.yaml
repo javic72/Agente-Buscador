@@ -1,0 +1,14 @@
+email:
+  enabled: true
+  provider: gmail
+  smtp_host: smtp.gmail.com
+  smtp_port: 587
+  smtp_user_env: SMTP_USER
+  smtp_password_env: SMTP_PASSWORD
+  from_address: buscadoragente@gmail.com
+  to:
+    - javicsilva@gmail.com
+  subject: Informe diario de oportunidades privadas
+  attach_html: true
+  include_local_report_path: true
+  summary_level: basico
