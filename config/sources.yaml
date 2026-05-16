@@ -111,3 +111,11 @@ queries:
       - '"oficinas flexibles" nueva sede España'
       - '"coliving" apertura España'
       - '"flex office" apertura España'
+
+  - sector: Inmobiliario
+    terms:
+      - 'site:idealista.com/news/inmobiliario oficinas España'
+      - 'site:idealista.com/news/inmobiliario retail España'
+      - 'site:idealista.com/news/inmobiliario hoteles España'
+      - 'site:idealista.com/news/inmobiliario activos alternativos España'
+      - 'site:idealista.com/news/inmobiliario logística España'

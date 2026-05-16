@@ -180,6 +180,16 @@ Las noticias antiguas se cuentan, pero no se listan una por una en el HTML.
 - `"coliving" apertura España`
 - `"flex office" apertura España`
 
+### Inmobiliario
+
+Estas búsquedas están restringidas a Idealista News porque no se ha localizado un RSS oficial para la sección indicada.
+
+- `site:idealista.com/news/inmobiliario oficinas España`
+- `site:idealista.com/news/inmobiliario retail España`
+- `site:idealista.com/news/inmobiliario hoteles España`
+- `site:idealista.com/news/inmobiliario activos alternativos España`
+- `site:idealista.com/news/inmobiliario logística España`
+
 ## 5. Palabras y señales que suman puntos
 
 Archivo editable:

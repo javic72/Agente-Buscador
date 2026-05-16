@@ -117,6 +117,19 @@ additional_rss:
 
 Estas fuentes se consultan en cada ejecución, independientemente de que Google News las muestre o no en una búsqueda concreta.
 
+Si una fuente no tiene RSS claro, se puede vigilar mediante búsquedas restringidas a dominio. Por ejemplo:
+
+```yaml
+queries:
+  - sector: Inmobiliario
+    terms:
+      - 'site:idealista.com/news/inmobiliario oficinas España'
+      - 'site:idealista.com/news/inmobiliario retail España'
+      - 'site:idealista.com/news/inmobiliario hoteles España'
+```
+
+Esto no consulta la web directamente: pide a Google News resultados limitados a esa fuente o sección.
+
 ## Envío por email
 
 El proyecto puede enviar el informe HTML como adjunto al terminar la ejecución.
