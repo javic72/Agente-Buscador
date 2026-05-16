@@ -4,6 +4,12 @@ Programa local en Python para detectar señales diarias de proyectos físicos pr
 
 El programa consulta RSS, aplica una puntuación configurable, guarda histórico en CSV y genera un informe HTML diario.
 
+Para auditar en qué se basa el agente, revisa:
+
+```text
+docs/criterios_de_busqueda_y_clasificacion.md
+```
+
 ## Requisitos
 
 - Windows 10 u 11.
