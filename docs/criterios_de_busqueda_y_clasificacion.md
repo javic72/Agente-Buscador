@@ -381,7 +381,27 @@ Cada oportunidad incluye:
 - `status`
 - `notes`
 
-## 10. Necesidades tecnológicas probables
+## 10. Catálogo acumulado de fuentes
+
+Además del informe diario, el agente mantiene un Excel acumulado:
+
+```text
+data/sources_catalog.xlsx
+```
+
+Este Excel ayuda a auditar de dónde se está nutriendo el agente.
+
+Columnas:
+
+- `Fuente`: web principal de la fuente, sin URL completa de la noticia.
+- `numero de apariciones`: número acumulado de apariciones.
+- `sectores`: sectores detectados para esa fuente, acumulados sin repetir.
+- `ultima aparicion`: última fecha de detección.
+- `prioridad maxima encontrada`: prioridad más alta encontrada para esa fuente.
+
+La fuente solo aparece una vez. Si vuelve a salir en otra noticia o ejecución, se actualiza la fila existente.
+
+## 11. Necesidades tecnológicas probables
 
 El agente no sabe si el proyecto necesita tecnología. Lo infiere por sector.
 
@@ -396,7 +416,7 @@ Ejemplos:
 - Cultura y ocio: proyección, audio inmersivo, LED, señalización digital.
 - Coworking y coliving: salas de reunión, videoconferencia, señalización digital.
 
-## 11. Posibles mejoras a revisar
+## 12. Posibles mejoras a revisar
 
 ### Fuentes
 
@@ -449,7 +469,7 @@ Se podría separar mejor:
 - ocio familiar
 - espacios inmersivos
 
-## 12. Archivos que debes revisar para afinar el agente
+## 13. Archivos que debes revisar para afinar el agente
 
 Fuentes y búsquedas:
 

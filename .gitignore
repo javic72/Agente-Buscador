@@ -3,6 +3,7 @@ __pycache__/
 *.py[cod]
 
 data/opportunities.csv
+data/sources_catalog.xlsx
 reports/*.html
 
 .env

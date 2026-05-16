@@ -61,9 +61,34 @@ python main.py
 El programa generará o actualizará:
 
 - `data/opportunities.csv`
+- `data/sources_catalog.xlsx`
 - `reports/daily_report_YYYY-MM-DD.html`
 
 Al terminar, la consola muestra el número de noticias encontradas, oportunidades por prioridad y la ruta del informe HTML generado.
+
+## Catálogo de fuentes
+
+El agente mantiene un Excel acumulado con las fuentes de información detectadas:
+
+```text
+data/sources_catalog.xlsx
+```
+
+Este archivo tiene una fila por web principal, no una fila por noticia.
+
+Columnas:
+
+- `Fuente`: dominio principal de la fuente.
+- `numero de apariciones`: cuántas veces ha aparecido esa fuente.
+- `sectores`: sectores en los que ha aparecido, acumulados sin repetir.
+- `ultima aparicion`: última fecha en la que apareció.
+- `prioridad maxima encontrada`: prioridad más alta que generó esa fuente.
+
+Ejemplo de comportamiento:
+
+Si una fuente aparece por primera vez, se añade una fila nueva. Si vuelve a aparecer, no se crea otra fila: se actualizan apariciones, sectores, última aparición y prioridad máxima.
+
+En GitHub Actions, este Excel también se guarda como artefacto descargable de cada ejecución.
 
 ## Envío por email
 

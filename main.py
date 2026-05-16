@@ -13,12 +13,14 @@ from src.freshness import (
 )
 from src.parser import build_opportunity
 from src.report_generator import generate_daily_report
+from src.source_catalog import update_source_catalog
 from src.storage import append_records, ensure_storage, load_history
 
 
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_DIR = BASE_DIR / "config"
 DATA_PATH = BASE_DIR / "data" / "opportunities.csv"
+SOURCE_CATALOG_PATH = BASE_DIR / "data" / "sources_catalog.xlsx"
 REPORTS_DIR = BASE_DIR / "reports"
 
 
@@ -82,6 +84,7 @@ def main():
             duplicate_checker.register(classified.get("url", ""), classified.get("title", ""))
 
     append_records(DATA_PATH, records_to_store)
+    source_catalog_path = update_source_catalog(SOURCE_CATALOG_PATH, detected_today)
 
     report_counts = {
         "Alta": sum(1 for item in report_items if item["priority"] == "Alta"),
@@ -125,6 +128,7 @@ def main():
     print(f"- Descartadas por otros motivos: {summary_stats['Descartadas por otros motivos']}")
     print(f"- Penalizadas por ya inauguradas: {already_opened_penalty_count}")
     print(f"- Informe HTML generado: {report_path}")
+    print(f"- Catálogo de fuentes actualizado: {source_catalog_path}")
     if email_result["sent"]:
         print("- Email enviado correctamente")
     else:

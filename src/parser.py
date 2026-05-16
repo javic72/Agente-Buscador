@@ -14,6 +14,7 @@ def build_opportunity(item, keywords_config):
         "published_date": item.get("published_date", ""),
         "sector": item.get("sector", ""),
         "source": item.get("source", ""),
+        "source_url": item.get("source_url", ""),
         "title": clean_text(item.get("title", "")),
         "url": item.get("url", ""),
         "detected_company_or_operator": company_or_operator,

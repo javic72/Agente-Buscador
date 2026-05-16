@@ -59,7 +59,9 @@ jobs:
         if: steps.time_gate.outputs.should_run == 'true'
         uses: actions/cache@v4
         with:
-          path: data/opportunities.csv
+          path: |
+            data/opportunities.csv
+            data/sources_catalog.xlsx
           key: opportunities-history-${{ github.run_id }}
           restore-keys: |
             opportunities-history-
@@ -76,4 +78,5 @@ jobs:
           path: |
             reports/*.html
             data/opportunities.csv
+            data/sources_catalog.xlsx
           if-no-files-found: warn

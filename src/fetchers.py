@@ -105,6 +105,7 @@ def fetch_rss_url(url, sector, query, google_config):
                 "sector": sector,
                 "query": query,
                 "source": entry.get("source") or entry.get("feed_title") or "RSS",
+                "source_url": entry.get("source_url", ""),
                 "title": entry.get("title", "").strip(),
                 "url": entry.get("link", "").strip(),
                 "published_date": normalize_date(entry.get("published_date", "")),
@@ -140,6 +141,7 @@ def parse_rss_entries(root):
                 "summary": get_child_text(item, "description")
                 or get_child_text(item, "summary"),
                 "source": get_child_text(item, "source"),
+                "source_url": get_child_attribute(item, "source", "url"),
             }
         )
     return entries
@@ -157,6 +159,13 @@ def get_child_text(parent, child_name):
     for child in list(parent):
         if strip_namespace(child.tag) == child_name:
             return child.text or ""
+    return ""
+
+
+def get_child_attribute(parent, child_name, attribute_name):
+    for child in list(parent):
+        if strip_namespace(child.tag) == child_name:
+            return child.attrib.get(attribute_name, "")
     return ""
 
 
