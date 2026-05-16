@@ -104,6 +104,8 @@ class SimpleYamlParser:
         return result, index
 
     def is_key_value(self, content):
+        if content.startswith(("'", '"')):
+            return False
         if ":" not in content:
             return False
         key = content.split(":", 1)[0]

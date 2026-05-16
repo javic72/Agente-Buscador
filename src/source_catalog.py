@@ -27,7 +27,14 @@ def update_source_catalog(xlsx_path, opportunities):
     xlsx_path = Path(xlsx_path)
     xlsx_path.parent.mkdir(parents=True, exist_ok=True)
 
-    workbook, sheet = load_or_create_workbook(xlsx_path)
+    try:
+        workbook, sheet = load_or_create_workbook(xlsx_path)
+    except PermissionError:
+        print(
+            f"  Aviso: el catálogo de fuentes está bloqueado y no se pudo actualizar: {xlsx_path}"
+        )
+        return xlsx_path
+
     existing_rows = read_existing_rows(sheet)
 
     for opportunity in opportunities:
@@ -59,7 +66,12 @@ def update_source_catalog(xlsx_path, opportunities):
 
     write_rows(sheet, existing_rows)
     format_sheet(sheet)
-    workbook.save(xlsx_path)
+    try:
+        workbook.save(xlsx_path)
+    except PermissionError:
+        print(
+            f"  Aviso: el catálogo de fuentes está bloqueado y no se pudo guardar: {xlsx_path}"
+        )
     return xlsx_path
 
 
