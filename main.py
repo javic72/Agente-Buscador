@@ -3,7 +3,7 @@ from datetime import datetime
 
 from src.classifier import classify_opportunity
 from src.config_loader import load_yaml
-from src.deduplicator import DuplicateChecker
+from src.deduplicator import DuplicateChecker, deduplicate_for_report
 from src.email_sender import send_daily_email
 from src.fetchers import fetch_all_items
 from src.freshness import (
@@ -86,6 +86,16 @@ def main():
     append_records(DATA_PATH, records_to_store)
     source_catalog_path = update_source_catalog(SOURCE_CATALOG_PATH, detected_today)
 
+    report_items, report_duplicate_count = deduplicate_for_report(
+        report_items,
+        similarity_threshold=scoring_config.get("deduplication", {}).get(
+            "report_title_similarity_threshold", 0.9
+        ),
+        token_overlap_threshold=scoring_config.get("deduplication", {}).get(
+            "report_title_token_overlap_threshold", 0.7
+        ),
+    )
+
     report_counts = {
         "Alta": sum(1 for item in report_items if item["priority"] == "Alta"),
         "Media": sum(1 for item in report_items if item["priority"] == "Media"),
@@ -103,10 +113,11 @@ def main():
         "Descartadas por antigüedad": old_news_count,
         "Descartadas por otros motivos": sum(
             1
-            for item in detected_today
+            for item in report_items
             if item["priority"] == "Descartada" and item.get("notes") != "noticia antigua"
         ),
         "Penalizadas por ya inauguradas": already_opened_penalty_count,
+        "Duplicados ocultados en informe": report_duplicate_count,
     }
 
     report_path = generate_daily_report(
@@ -115,6 +126,9 @@ def main():
         report_date=datetime.now().date(),
         temporal_label=temporal_label,
         summary_stats=summary_stats,
+        max_discarded_items=scoring_config.get("reporting", {}).get(
+            "max_discarded_items_in_html", 25
+        ),
     )
     email_result = send_daily_email(email_config, report_path, summary_stats)
 
@@ -127,6 +141,7 @@ def main():
     print(f"- Descartadas por antigüedad: {old_news_count}")
     print(f"- Descartadas por otros motivos: {summary_stats['Descartadas por otros motivos']}")
     print(f"- Penalizadas por ya inauguradas: {already_opened_penalty_count}")
+    print(f"- Duplicados ocultados en informe: {report_duplicate_count}")
     print(f"- Informe HTML generado: {report_path}")
     print(f"- Catálogo de fuentes actualizado: {source_catalog_path}")
     if email_result["sent"]:

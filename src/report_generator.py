@@ -8,6 +8,7 @@ def generate_daily_report(
     report_date,
     temporal_label="",
     summary_stats=None,
+    max_discarded_items=25,
 ):
     reports_dir = Path(reports_dir)
     reports_dir.mkdir(parents=True, exist_ok=True)
@@ -22,12 +23,18 @@ def generate_daily_report(
         ],
     }
 
-    html = build_html(groups, report_date, temporal_label, summary_stats or {})
+    html = build_html(
+        groups,
+        report_date,
+        temporal_label,
+        summary_stats or {},
+        max_discarded_items=max_discarded_items,
+    )
     report_path.write_text(html, encoding="utf-8")
     return report_path
 
 
-def build_html(groups, report_date, temporal_label, summary_stats):
+def build_html(groups, report_date, temporal_label, summary_stats, max_discarded_items=25):
     total = sum(len(items) for items in groups.values())
     cards = build_summary_cards(summary_stats, groups)
     has_recent_opportunities = bool(groups["Alta"] or groups["Media"] or groups["Baja"])
@@ -44,7 +51,11 @@ def build_html(groups, report_date, temporal_label, summary_stats):
             build_section("Oportunidades Alta", groups["Alta"]),
             build_section("Oportunidades Media", groups["Media"]),
             build_section("Oportunidades Baja", groups["Baja"]),
-            build_section("Descartadas recientes por otros motivos", groups["Descartada"]),
+            build_section(
+                "Descartadas recientes por otros motivos",
+                groups["Descartada"][:max_discarded_items],
+                hidden_count=max(0, len(groups["Descartada"]) - max_discarded_items),
+            ),
         ]
     )
 
@@ -177,6 +188,7 @@ def build_summary_cards(summary_stats, groups):
             "Descartadas por antigüedad": 0,
             "Descartadas por otros motivos": len(groups["Descartada"]),
             "Penalizadas por ya inauguradas": 0,
+            "Duplicados ocultados en informe": 0,
         }
 
     labels = [
@@ -188,6 +200,7 @@ def build_summary_cards(summary_stats, groups):
         "Descartadas por antigüedad",
         "Descartadas por otros motivos",
         "Penalizadas por ya inauguradas",
+        "Duplicados ocultados en informe",
     ]
     return "".join(summary_card(label, summary_stats.get(label, 0)) for label in labels)
 
@@ -196,12 +209,18 @@ def summary_card(label, count):
     return f'<div class="summary-card">{escape(label)}<strong>{count}</strong></div>'
 
 
-def build_section(title, items):
+def build_section(title, items, hidden_count=0):
     if not items:
         return f"<h2>{escape(title)}</h2><article class=\"empty\">Sin registros en esta sección.</article>"
 
     articles = [build_article(item) for item in items]
-    return f"<h2>{escape(title)}</h2>{''.join(articles)}"
+    hidden_note = ""
+    if hidden_count:
+        hidden_note = (
+            f'<article class="empty">Se han ocultado {hidden_count} descartadas '
+            "adicionales para mantener el informe legible.</article>"
+        )
+    return f"<h2>{escape(title)}</h2>{''.join(articles)}{hidden_note}"
 
 
 def build_article(item):

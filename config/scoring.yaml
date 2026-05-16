@@ -42,3 +42,8 @@ priority_thresholds:
 
 deduplication:
   title_similarity_threshold: 0.88
+  report_title_similarity_threshold: 0.9
+  report_title_token_overlap_threshold: 0.7
+
+reporting:
+  max_discarded_items_in_html: 25

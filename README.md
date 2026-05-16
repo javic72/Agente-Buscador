@@ -90,6 +90,39 @@ Si una fuente aparece por primera vez, se añade una fila nueva. Si vuelve a apa
 
 En GitHub Actions, este Excel también se guarda como artefacto descargable de cada ejecución.
 
+## Limpieza del informe
+
+Antes de generar el HTML, el agente oculta duplicados internos de la misma ejecución.
+
+Detecta duplicados por:
+
+- URL canónica.
+- Título igual o muy similar.
+- Núcleo del título parecido, eliminando palabras de ruido y verbos temporales.
+
+Si encuentra varias versiones de la misma noticia, conserva la mejor según prioridad y puntuación.
+
+El resumen ejecutivo muestra:
+
+```text
+Duplicados ocultados en informe
+```
+
+Para que el HTML no sea demasiado largo, también limita la sección de descartadas recientes. El límite se configura en:
+
+```text
+config/scoring.yaml
+```
+
+```yaml
+reporting:
+  max_discarded_items_in_html: 25
+
+deduplication:
+  report_title_similarity_threshold: 0.9
+  report_title_token_overlap_threshold: 0.7
+```
+
 ## Fuentes directas RSS
 
 Además de Google News RSS, el agente puede consultar fuentes concretas directamente si tienen RSS.

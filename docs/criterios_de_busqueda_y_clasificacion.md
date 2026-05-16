@@ -89,7 +89,40 @@ Cuando usa Google News RSS, el agente añade automáticamente un filtro temporal
 
 Las noticias antiguas se cuentan, pero no se listan una por una en el HTML.
 
-## 4. Búsquedas activas por sector
+## 4. Limpieza de duplicados en el informe
+
+Antes de generar el HTML, el agente hace una segunda deduplicación solo para el informe.
+
+Objetivo:
+
+- evitar que una misma noticia aparezca varias veces por venir de queries distintas.
+- evitar que una marca, apertura o proyecto salga repetido con títulos casi iguales.
+- conservar la versión con mejor prioridad y puntuación.
+
+Criterios usados:
+
+- URL canónica igual.
+- título igual o muy similar.
+- núcleo del título parecido, eliminando palabras de ruido y verbos temporales.
+
+El resumen ejecutivo muestra:
+
+```text
+Duplicados ocultados en informe
+```
+
+La sección de descartadas recientes también se limita para mantener el informe legible. El límite actual está en:
+
+```yaml
+reporting:
+  max_discarded_items_in_html: 25
+
+deduplication:
+  report_title_similarity_threshold: 0.9
+  report_title_token_overlap_threshold: 0.7
+```
+
+## 5. Búsquedas activas por sector
 
 ### Oficinas
 
@@ -190,7 +223,7 @@ Estas búsquedas están restringidas a Idealista News porque no se ha localizado
 - `site:idealista.com/news/inmobiliario activos alternativos España`
 - `site:idealista.com/news/inmobiliario logística España`
 
-## 5. Palabras y señales que suman puntos
+## 6. Palabras y señales que suman puntos
 
 Archivo editable:
 
@@ -264,7 +297,7 @@ Estas señales apuntan a un espacio físico:
 - museo: `+15`
 - espacio inmersivo: `+15`
 
-## 6. Palabras y señales que restan puntos
+## 7. Palabras y señales que restan puntos
 
 ### Proyecto ya inaugurado o abierto
 
@@ -337,7 +370,7 @@ Nota importante:
 
 No se descarta automáticamente una noticia solo por mencionar una administración. Se penaliza cuando la administración parece protagonista o cuando la noticia apunta a contratación pública.
 
-## 7. Fase detectada
+## 8. Fase detectada
 
 El informe incluye:
 
@@ -364,7 +397,7 @@ Ejemplos genéricos:
 - Si aparece `busca local`, puede clasificar como `en planificación`.
 - Si aparece `ha inaugurado`, puede clasificar como `ya inaugurado`.
 
-## 8. Clasificación final
+## 9. Clasificación final
 
 La puntuación se limita entre 0 y 100.
 
@@ -375,7 +408,7 @@ Clasificación:
 - `Baja`: 25 a 49
 - `Descartada`: 0 a 24
 
-## 9. Campos del informe
+## 10. Campos del informe
 
 Cada oportunidad incluye:
 
@@ -400,7 +433,7 @@ Cada oportunidad incluye:
 - `status`
 - `notes`
 
-## 10. Catálogo acumulado de fuentes
+## 11. Catálogo acumulado de fuentes
 
 Además del informe diario, el agente mantiene un Excel acumulado:
 
@@ -420,7 +453,7 @@ Columnas:
 
 La fuente solo aparece una vez. Si vuelve a salir en otra noticia o ejecución, se actualiza la fila existente.
 
-## 11. Necesidades tecnológicas probables
+## 12. Necesidades tecnológicas probables
 
 El agente no sabe si el proyecto necesita tecnología. Lo infiere por sector.
 
@@ -435,7 +468,7 @@ Ejemplos:
 - Cultura y ocio: proyección, audio inmersivo, LED, señalización digital.
 - Coworking y coliving: salas de reunión, videoconferencia, señalización digital.
 
-## 12. Posibles mejoras a revisar
+## 13. Posibles mejoras a revisar
 
 ### Fuentes
 
@@ -488,7 +521,7 @@ Se podría separar mejor:
 - ocio familiar
 - espacios inmersivos
 
-## 13. Archivos que debes revisar para afinar el agente
+## 14. Archivos que debes revisar para afinar el agente
 
 Fuentes y búsquedas:
 
