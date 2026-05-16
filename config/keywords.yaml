@@ -7,6 +7,7 @@ priority_sectors:
   - Deporte
   - Cultura y ocio
   - Coworking y coliving
+  - Inmobiliario
 
 future_project_signals:
   - abrirá
@@ -451,3 +452,10 @@ probable_technology_needs:
     - videoconferencia
     - señalización digital
     - control de accesos visual
+  Inmobiliario:
+    - salas de reunión
+    - videoconferencia
+    - señalización digital
+    - cartelería digital
+    - audio
+    - LED

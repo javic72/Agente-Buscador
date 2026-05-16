@@ -11,7 +11,16 @@ google_news:
   timeout_seconds: 15
   pause_seconds: 1
 
-additional_rss: []
+additional_rss:
+  - name: EjePrime
+    enabled: true
+    sector: Inmobiliario
+    url: https://www.ejeprime.com/rss.xml
+
+  - name: Modaes
+    enabled: true
+    sector: Retail
+    url: https://www.modaes.com/rss.xml
 
 queries:
   - sector: Oficinas

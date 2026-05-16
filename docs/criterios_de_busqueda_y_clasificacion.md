@@ -54,10 +54,19 @@ google_news:
 También existe una sección para añadir RSS adicionales:
 
 ```yaml
-additional_rss: []
+additional_rss:
+  - name: EjePrime
+    enabled: true
+    sector: Inmobiliario
+    url: https://www.ejeprime.com/rss.xml
+
+  - name: Modaes
+    enabled: true
+    sector: Retail
+    url: https://www.modaes.com/rss.xml
 ```
 
-Ahora mismo no hay fuentes RSS sectoriales adicionales configuradas.
+Estas fuentes se consultan directamente en cada ejecución, además de Google News RSS. Si una web sectorial importante no aparece bien en Google News pero tiene RSS, se puede añadir aquí.
 
 ## 3. Filtro temporal
 

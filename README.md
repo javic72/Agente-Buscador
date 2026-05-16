@@ -90,6 +90,33 @@ Si una fuente aparece por primera vez, se añade una fila nueva. Si vuelve a apa
 
 En GitHub Actions, este Excel también se guarda como artefacto descargable de cada ejecución.
 
+## Fuentes directas RSS
+
+Además de Google News RSS, el agente puede consultar fuentes concretas directamente si tienen RSS.
+
+Están configuradas en:
+
+```text
+config/sources.yaml
+```
+
+Sección:
+
+```yaml
+additional_rss:
+  - name: EjePrime
+    enabled: true
+    sector: Inmobiliario
+    url: https://www.ejeprime.com/rss.xml
+
+  - name: Modaes
+    enabled: true
+    sector: Retail
+    url: https://www.modaes.com/rss.xml
+```
+
+Estas fuentes se consultan en cada ejecución, independientemente de que Google News las muestre o no en una búsqueda concreta.
+
 ## Envío por email
 
 El proyecto puede enviar el informe HTML como adjunto al terminar la ejecución.
