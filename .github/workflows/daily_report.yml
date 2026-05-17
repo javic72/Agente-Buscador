@@ -3,8 +3,8 @@ name: Daily opportunity report
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron uses UTC. The time gate below keeps the real run at 10:00 Europe/Madrid.
-    - cron: "0 8,9 * * *"
+    # GitHub cron uses UTC. The time gate below keeps the real run at 10:17 Europe/Madrid.
+    - cron: "17 8,9 * * *"
 
 concurrency:
   group: daily-opportunity-report
