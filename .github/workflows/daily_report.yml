@@ -3,8 +3,9 @@ name: Daily opportunity report
 on:
   workflow_dispatch:
   schedule:
-    # GitHub cron uses UTC. The time gate below keeps the real run at 10:17 Europe/Madrid.
-    - cron: "17 8,9 * * *"
+    # GitHub cron uses UTC. The time gate below keeps the intended run at 10:17 Europe/Madrid.
+    - cron: "17 8 * * *"
+    - cron: "17 9 * * *"
 
 concurrency:
   group: daily-opportunity-report
@@ -17,6 +18,7 @@ jobs:
     env:
       SMTP_USER: ${{ secrets.SMTP_USER }}
       SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+      SCHEDULE_EXPRESSION: ${{ github.event.schedule }}
 
     steps:
       - name: Check Spain time window
@@ -25,19 +27,40 @@ jobs:
         run: |
           python - <<'PY' >> "$GITHUB_OUTPUT"
           import os
-          from datetime import datetime
+          from datetime import datetime, timezone
           from zoneinfo import ZoneInfo
 
           is_manual = os.environ.get("GITHUB_EVENT_NAME") == "workflow_dispatch"
           now = datetime.now(ZoneInfo("Europe/Madrid"))
-          should_run = is_manual or now.hour == 10
+          schedule_expression = os.environ.get("SCHEDULE_EXPRESSION", "")
+          scheduled_utc_hours = {
+              "17 8 * * *": 8,
+              "17 9 * * *": 9,
+          }
+          scheduled_spain_time = ""
+          should_run = is_manual
+
+          if not should_run and schedule_expression in scheduled_utc_hours:
+              scheduled_utc = datetime(
+                  now.year,
+                  now.month,
+                  now.day,
+                  scheduled_utc_hours[schedule_expression],
+                  17,
+                  tzinfo=timezone.utc,
+              )
+              scheduled_spain = scheduled_utc.astimezone(ZoneInfo("Europe/Madrid"))
+              scheduled_spain_time = scheduled_spain.isoformat(timespec="seconds")
+              should_run = scheduled_spain.hour == 10 and scheduled_spain.minute == 17
+
           print(f"should_run={str(should_run).lower()}")
           print(f"spain_time={now.isoformat(timespec='seconds')}")
+          print(f"scheduled_spain_time={scheduled_spain_time}")
           PY
 
       - name: Show skipped run
         if: steps.time_gate.outputs.should_run != 'true'
-        run: echo "Skipped because Spain time is ${{ steps.time_gate.outputs.spain_time }}"
+        run: echo "Skipped. Spain time is ${{ steps.time_gate.outputs.spain_time }}. Scheduled Spain time was ${{ steps.time_gate.outputs.scheduled_spain_time }}"
 
       - name: Check out repository
         if: steps.time_gate.outputs.should_run == 'true'
